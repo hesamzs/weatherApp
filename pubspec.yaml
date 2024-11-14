@@ -1,6 +1,6 @@
 name: weatherapp
 description: WeatherApp with Flutter by HesamZs
-publish_to: 'HesamZs'
+publish_to: 'hesamzs'
 version: 1.0.0+1
 
 environment:
@@ -25,4 +25,3 @@ flutter:
     - assets/images/
     - assets/images/day/
     - assets/images/night/
-
