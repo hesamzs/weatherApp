@@ -12,7 +12,7 @@ Widget headerWidget(double sWidth, WeatherFilter weatherFilter) {
 
   return CustomContainer(
     width: sWidth,
-    height: 210,
+    height: 230,
     border: 0,
     child: Row(
       children: [

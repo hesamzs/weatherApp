@@ -1,6 +1,6 @@
 name: weatherapp
 description: WeatherApp with Flutter by HesamZs
-publish_to: 'hesamzs'
+publish_to: 'HesamZs'
 version: 1.0.0+1
 
 environment:
