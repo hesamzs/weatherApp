@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class GetWeather {
-  var baseUrl = "http://api.weatherapi.com";
+  var baseUrl = "https://api.weatherapi.com";
   var token = "99bc6dab5acd45a78a2214616230204";
   var city = "London";
 
