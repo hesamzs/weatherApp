@@ -10,7 +10,7 @@ import 'package:weatherapp/widgets/icons_widget.dart';
 import '404_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
