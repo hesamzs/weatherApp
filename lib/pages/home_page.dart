@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weatherapp/api/api.dart';
-import 'package:weatherapp/widgets/appbar_widget.dart';
 import 'package:weatherapp/widgets/custom_container.dart';
 import 'package:weatherapp/widgets/date_widget.dart';
 import 'package:weatherapp/widgets/header_widget.dart';
