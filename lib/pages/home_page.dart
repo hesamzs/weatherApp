@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   GetWeather weather = GetWeather();
   WeatherFilter weatherfilter = WeatherFilter();
+  TextEditingController controller = TextEditingController();
 
   GetDate getdate = GetDate();
   bool isValidName = true;
@@ -31,9 +32,10 @@ class _HomePageState extends State<HomePage> {
       } else {
         isValidName = true;
         weatherfilter = value;
+        controller.clear();
+        setState(() {});
       }
     });
-    setState(() {});
   }
 
   @override
@@ -53,7 +55,80 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color(0xff11113A),
           body: Column(
             children: [
-              appBarWidget(sWidth, context),
+              // appBarWidget(sWidth, context),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CustomContainer(
+                        height: 50,
+                        width: 1,
+                        border: 25,
+                        child: TextField(
+                          controller: controller,
+                          onSubmitted: (value) {
+                            getWeather(value);
+                            FocusScope.of(context).unfocus();
+                          },
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xffC0BFCB),
+                            fontSize: sWidth * 0.05,
+                            shadows: const [
+                              Shadow(
+                                color: Color(0xff1D1D44),
+                                offset: Offset(0, 3),
+                                blurRadius: 6,
+                              ),
+                            ],
+                          ),
+                          textCapitalization: TextCapitalization.words,
+                          decoration: InputDecoration(
+                            hintText: "Search Here !",
+                            hintStyle: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xffC0BFCB).withOpacity(0.4),
+                              fontSize: sWidth * 0.05,
+                              shadows: const [
+                                Shadow(
+                                  color: Color(0xff1D1D44),
+                                  offset: Offset(0, 3),
+                                  blurRadius: 6,
+                                ),
+                              ],
+                            ),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                          ),
+                          cursorColor: Colors.white70,
+                          cursorWidth: 1.5,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        getWeather(controller.text);
+                        FocusScope.of(context).unfocus();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: CustomContainer(
+                          width: 50,
+                          height: 50,
+                          border: 25,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                right: 12.0, left: 10, bottom: 4),
+                            child: SvgPicture.asset("assets/images/search.svg"),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               isValidName
                   ? Expanded(
                       child: SingleChildScrollView(
@@ -64,16 +139,21 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               width: sWidth,
                               child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 20, horizontal: 20),
                                 child: Text(
                                   "Today",
-                                  style: TextStyle(shadows: [
-                                    Shadow(
-                                      color: Colors.white10,
-                                      offset: Offset(1, 1),
-                                      blurRadius: 6,
-                                    ),
-                                  ], fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffD2D1DB)),
+                                  style: TextStyle(
+                                      shadows: [
+                                        Shadow(
+                                          color: Colors.white10,
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                        ),
+                                      ],
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xffD2D1DB)),
                                 ),
                               ),
                             ),
@@ -106,7 +186,8 @@ class _HomePageState extends State<HomePage> {
           itemCount: 3,
           itemBuilder: (BuildContext context, int index) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2.5),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 2.5),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -167,7 +248,8 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.only(bottom: 6.0),
                         child: Image.asset(
                           getIcons().getImageID(
-                            weatherfilter.forecast["day-$index"]["condition-code"],
+                            weatherfilter.forecast["day-$index"]
+                                ["condition-code"],
                             1,
                           ),
                           width: 40,
@@ -246,22 +328,29 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 6.0),
                     child: Text(
-                      CreateHour().hour(index, weatherfilter.hour_forecast[0][index]["is_day"]),
-                      style: TextStyle(shadows: const [
-                        Shadow(
-                          color: Colors.white10,
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                        ),
-                      ], fontSize: 12, fontWeight: FontWeight.bold, color: const Color(0xffD2D1DB).withOpacity(0.5)),
+                      CreateHour().hour(index,
+                          weatherfilter.hour_forecast[0][index]["is_day"]),
+                      style: TextStyle(
+                          shadows: const [
+                            Shadow(
+                              color: Colors.white10,
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                            ),
+                          ],
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xffD2D1DB).withOpacity(0.5)),
                     ),
                   ),
                   SizedBox(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8),
+                      padding:
+                          const EdgeInsets.only(top: 8.0, bottom: 8, left: 8),
                       child: Image.asset(
                         getIcons().getImageID(
-                          weatherfilter.hour_forecast[0][index]["condition"]["code"],
+                          weatherfilter.hour_forecast[0][index]["condition"]
+                              ["code"],
                           weatherfilter.hour_forecast[0][index]["is_day"],
                         ),
                         width: 40,
@@ -321,13 +410,18 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(left: 6.0),
                           child: Text(
                             "${weatherfilter.hour_forecast[0][index]["chance_of_rain"]} %",
-                            style: TextStyle(shadows: const [
-                              Shadow(
-                                color: Colors.white10,
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                              ),
-                            ], fontSize: 12, fontWeight: FontWeight.bold, color: const Color(0xffD2D1DB).withOpacity(0.5)),
+                            style: TextStyle(
+                                shadows: const [
+                                  Shadow(
+                                    color: Colors.white10,
+                                    offset: Offset(1, 1),
+                                    blurRadius: 6,
+                                  ),
+                                ],
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    const Color(0xffD2D1DB).withOpacity(0.5)),
                           ),
                         ),
                       ],
