@@ -9,6 +9,11 @@ class GetWeather {
 
   Future getForeCast(String city) async {
     var response = await http.get(
+      headers: {
+        'content-type': 'application/json',
+        'Access-Control-Allow-Origin': "*",
+        "Accept": "*/*"
+      },
       Uri.parse(
         "$baseUrl/v1/forecast.json?key=$token&q=$city&days=7&aqi=no&alerts=no",
       ),
@@ -48,13 +53,50 @@ class WeatherFilter {
       "uv": 0,
     },
     this.forecast = const {
-      "day-0": {"date": "Loading ...", "maxtemp_c": "0", "mintemp_c": "0", "daily_chance_of_rain": "0", "avgtemp_c": "0", "condition-code": 0},
-      "day-1": {"date": "Loading ...", "daily_chance_of_rain": "0", "avgtemp_c": "0", "condition-code": 0},
-      "day-2": {"date": "Loading ...", "daily_chance_of_rain": "0", "avgtemp_c": "0", "condition-code": 0},
-      "day-3": {"date": "Loading ...", "daily_chance_of_rain": "0", "avgtemp_c": "0", "condition-code": 0},
-      "day-4": {"date": "Loading ...", "daily_chance_of_rain": "0", "avgtemp_c": "0", "condition-code": 0},
-      "day-5": {"date": "Loading ...", "daily_chance_of_rain": "0", "avgtemp_c": "0", "condition-code": 0},
-      "day-6": {"date": "Loading ...", "daily_chance_of_rain": "0", "avgtemp_c": "0", "condition-code": 0},
+      "day-0": {
+        "date": "Loading ...",
+        "maxtemp_c": "0",
+        "mintemp_c": "0",
+        "daily_chance_of_rain": "0",
+        "avgtemp_c": "0",
+        "condition-code": 0
+      },
+      "day-1": {
+        "date": "Loading ...",
+        "daily_chance_of_rain": "0",
+        "avgtemp_c": "0",
+        "condition-code": 0
+      },
+      "day-2": {
+        "date": "Loading ...",
+        "daily_chance_of_rain": "0",
+        "avgtemp_c": "0",
+        "condition-code": 0
+      },
+      "day-3": {
+        "date": "Loading ...",
+        "daily_chance_of_rain": "0",
+        "avgtemp_c": "0",
+        "condition-code": 0
+      },
+      "day-4": {
+        "date": "Loading ...",
+        "daily_chance_of_rain": "0",
+        "avgtemp_c": "0",
+        "condition-code": 0
+      },
+      "day-5": {
+        "date": "Loading ...",
+        "daily_chance_of_rain": "0",
+        "avgtemp_c": "0",
+        "condition-code": 0
+      },
+      "day-6": {
+        "date": "Loading ...",
+        "daily_chance_of_rain": "0",
+        "avgtemp_c": "0",
+        "condition-code": 0
+      },
     },
     this.hour_forecast = const [
       [
@@ -92,20 +134,26 @@ class WeatherFilter {
           "maxtemp_c": json["forecast"]["forecastday"][0]["day"]["maxtemp_c"],
           "mintemp_c": json["forecast"]["forecastday"][0]["day"]["mintemp_c"],
           "avgtemp_c": json["forecast"]["forecastday"][0]["day"]["avgtemp_c"],
-          "daily_chance_of_rain": json["forecast"]["forecastday"][0]["day"]["daily_chance_of_rain"],
-          "condition-code": json["forecast"]["forecastday"][0]["day"]["condition"]["code"],
+          "daily_chance_of_rain": json["forecast"]["forecastday"][0]["day"]
+              ["daily_chance_of_rain"],
+          "condition-code": json["forecast"]["forecastday"][0]["day"]
+              ["condition"]["code"],
         },
         "day-1": {
           "date": json["forecast"]["forecastday"][1]["date"],
-          "daily_chance_of_rain": json["forecast"]["forecastday"][1]["day"]["daily_chance_of_rain"],
+          "daily_chance_of_rain": json["forecast"]["forecastday"][1]["day"]
+              ["daily_chance_of_rain"],
           "avgtemp_c": json["forecast"]["forecastday"][1]["day"]["avgtemp_c"],
-          "condition-code": json["forecast"]["forecastday"][1]["day"]["condition"]["code"],
+          "condition-code": json["forecast"]["forecastday"][1]["day"]
+              ["condition"]["code"],
         },
         "day-2": {
           "date": json["forecast"]["forecastday"][2]["date"],
-          "daily_chance_of_rain": json["forecast"]["forecastday"][2]["day"]["daily_chance_of_rain"],
+          "daily_chance_of_rain": json["forecast"]["forecastday"][2]["day"]
+              ["daily_chance_of_rain"],
           "avgtemp_c": json["forecast"]["forecastday"][2]["day"]["avgtemp_c"],
-          "condition-code": json["forecast"]["forecastday"][2]["day"]["condition"]["code"],
+          "condition-code": json["forecast"]["forecastday"][2]["day"]
+              ["condition"]["code"],
         },
         // Api Limited.
         // "day-3": {
